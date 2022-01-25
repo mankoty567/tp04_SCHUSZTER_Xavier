@@ -1,0 +1,9 @@
+<div class="HeaderMenu">
+  <a [routerLink]="['/login']">Login</a>
+  <a [routerLink]="['/catalog']">Catalogue</a>
+  <p>
+    Nombre de produits dans le panier : {{ nb$ | async }}
+    <br />
+    <a [routerLink]="['/summary']">Voir mon panier</a>
+  </p>
+</div>

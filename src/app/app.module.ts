@@ -11,12 +11,17 @@ import {
 import { CatalogPageComponent } from './catalog-page/catalog-page.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule, Routes } from '@angular/router';
+import { TetiereComponent } from './tetiere/tetiere.component';
+import { NgxsModule } from '@ngxs/store';
+import { ArticleList } from 'shared/states/article-list-state';
+import { PanierComponent } from './panier/panier.component';
 
 const appRoutes: Routes = [
   { path: 'home', component: MainPageComponent },
   { path: 'login', component: UserCreationComponent },
   { path: 'createAccount', component: UserCreationComponent },
   { path: 'catalog', component: CatalogPageComponent },
+  { path: 'summary', component: PanierComponent },
 ];
 
 @NgModule({
@@ -26,6 +31,8 @@ const appRoutes: Routes = [
     UserCreationComponent,
     CatalogPageComponent,
     PhonePipe,
+    TetiereComponent,
+    PanierComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,6 +41,7 @@ const appRoutes: Routes = [
     FormsModule,
     AppRoutingModule,
     RouterModule.forRoot(appRoutes),
+    NgxsModule.forRoot([ArticleList]),
   ],
   providers: [],
   bootstrap: [AppComponent, UserCreationComponent],

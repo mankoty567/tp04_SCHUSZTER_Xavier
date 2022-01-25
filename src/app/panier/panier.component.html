@@ -1,0 +1,7 @@
+<h1>Mon panier :</h1>
+<ul>
+  <li *ngFor="let article of articleList$ | async">
+    {{ article.name }}
+    <button (click)="deleteArticle(article)">Supprimer du panier</button>
+  </li>
+</ul>

@@ -12,8 +12,9 @@
   <div *ngFor="let item of productList">
     <li>
       <p>Type : {{ item.name }}</p>
-      <p>Prix : {{ item.price }}</p>
+      <p>Prix : {{ item.price }}€</p>
       <p>Quantité : {{ item.number }}</p>
     </li>
+    <button (click)="addArticle(item)">Ajouter au panier</button>
   </div>
 </ul>

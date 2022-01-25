@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { of, Subscription, filter } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { ClientServiceService } from '../client-service.service';
+import { Store } from '@ngxs/store';
+import { AddArticle } from '../../../shared/actions/article.action';
+import { Article } from '../../../shared/models/article';
 
 type product = {
   id: number;
@@ -16,7 +19,7 @@ type product = {
   providers: [ClientServiceService],
 })
 export class CatalogPageComponent implements OnInit {
-  constructor(private service: ClientServiceService) {}
+  constructor(private service: ClientServiceService, private store: Store) {}
   public productList: product[] = [];
   public searchFilter: string = '';
   public productObservable$ = this.service.getCatalogue();
@@ -43,5 +46,9 @@ export class CatalogPageComponent implements OnInit {
     } else {
       this.productList = this.initialProductList;
     }
+  }
+
+  addArticle(item: Article): void {
+    this.store.dispatch(new AddArticle(item));
   }
 }
