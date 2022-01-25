@@ -18,12 +18,40 @@ import { PanierComponent } from './panier/panier.component';
 import { DetailComponent } from './detail/detail.component';
 
 const appRoutes: Routes = [
-  { path: 'home', component: MainPageComponent },
-  { path: 'login', component: UserCreationComponent },
-  { path: 'createAccount', component: UserCreationComponent },
-  { path: 'catalog', component: CatalogPageComponent },
-  { path: 'summary', component: PanierComponent },
-  { path: 'detail', component: DetailComponent },
+  {
+    path: 'home',
+    component: MainPageComponent,
+  },
+  {
+    path: 'login',
+    loadChildren: () =>
+      import('./user-creation/user-creation.component').then(
+        (m) => m.UserCreationComponent
+      ),
+  },
+  {
+    path: 'createAccount',
+    loadChildren: () =>
+      import('./user-creation/user-creation.component').then(
+        (m) => m.UserCreationComponent
+      ),
+  },
+  {
+    path: 'catalog',
+    loadChildren: () =>
+      import('./catalog-page/catalog-page.component').then(
+        (m) => m.CatalogPageComponent
+      ),
+  },
+  {
+    path: 'summary',
+    component: PanierComponent, //Fait crash en lazy loading. Je ne sais pas d'où ça vient ...
+  },
+  {
+    path: 'detail',
+    loadChildren: () =>
+      import('./detail/detail.component').then((m) => m.DetailComponent),
+  },
 ];
 
 @NgModule({
