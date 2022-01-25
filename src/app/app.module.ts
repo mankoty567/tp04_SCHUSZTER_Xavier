@@ -15,6 +15,7 @@ import { TetiereComponent } from './tetiere/tetiere.component';
 import { NgxsModule } from '@ngxs/store';
 import { ArticleList } from 'shared/states/article-list-state';
 import { PanierComponent } from './panier/panier.component';
+import { DetailComponent } from './detail/detail.component';
 
 const appRoutes: Routes = [
   { path: 'home', component: MainPageComponent },
@@ -22,6 +23,7 @@ const appRoutes: Routes = [
   { path: 'createAccount', component: UserCreationComponent },
   { path: 'catalog', component: CatalogPageComponent },
   { path: 'summary', component: PanierComponent },
+  { path: 'detail', component: DetailComponent },
 ];
 
 @NgModule({
@@ -33,6 +35,7 @@ const appRoutes: Routes = [
     PhonePipe,
     TetiereComponent,
     PanierComponent,
+    DetailComponent,
   ],
   imports: [
     BrowserModule,

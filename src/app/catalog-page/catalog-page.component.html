@@ -16,5 +16,9 @@
       <p>Quantité : {{ item.number }}</p>
     </li>
     <button (click)="addArticle(item)">Ajouter au panier</button>
+    <button (click)="setSelected(item)">Detail</button>
   </div>
 </ul>
+<div *ngIf="selected">
+  <app-detail></app-detail>
+</div>

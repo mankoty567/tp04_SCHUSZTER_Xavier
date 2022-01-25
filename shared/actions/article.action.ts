@@ -11,3 +11,9 @@ export class DeleteArticle {
 
   constructor(public payload: Article) {}
 }
+
+export class SetSelected {
+  static readonly type = '[Article] Update';
+
+  constructor(public payload: Article) {}
+}

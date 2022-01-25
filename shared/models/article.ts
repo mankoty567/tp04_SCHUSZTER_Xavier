@@ -3,4 +3,5 @@ export class Article {
   name: string = '';
   price: number = 0;
   number: number = 0;
+  description: string = '';
 }

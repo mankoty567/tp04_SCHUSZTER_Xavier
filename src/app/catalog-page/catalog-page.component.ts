@@ -2,15 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ClientServiceService } from '../client-service.service';
 import { Store } from '@ngxs/store';
-import { AddArticle } from '../../../shared/actions/article.action';
+import {
+  AddArticle,
+  SetSelected,
+} from '../../../shared/actions/article.action';
 import { Article } from '../../../shared/models/article';
-
-type product = {
-  id: number;
-  name: string;
-  price: number;
-  number: number;
-};
 
 @Component({
   selector: 'app-catalog-page',
@@ -20,10 +16,11 @@ type product = {
 })
 export class CatalogPageComponent implements OnInit {
   constructor(private service: ClientServiceService, private store: Store) {}
-  public productList: product[] = [];
+  public productList: Article[] = [];
   public searchFilter: string = '';
   public productObservable$ = this.service.getCatalogue();
-  public initialProductList: product[] = [];
+  public initialProductList: Article[] = [];
+  public selected = false;
 
   subscribe: Subscription | undefined;
 
@@ -50,5 +47,10 @@ export class CatalogPageComponent implements OnInit {
 
   addArticle(item: Article): void {
     this.store.dispatch(new AddArticle(item));
+  }
+
+  setSelected(item: Article): void {
+    this.selected = true;
+    this.store.dispatch(new SetSelected(item));
   }
 }

@@ -1,12 +1,23 @@
 import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { ArticleListModel } from './article-list-model';
-import { AddArticle, DeleteArticle } from 'shared/actions/article.action';
+import {
+  AddArticle,
+  DeleteArticle,
+  SetSelected,
+} from 'shared/actions/article.action';
 
 @State<ArticleListModel>({
   name: 'articles',
   defaults: {
     articles: [],
+    selected: {
+      id: -1,
+      name: 'undefined',
+      price: 0,
+      number: 0,
+      description: 'Something went wrong. Please try later !',
+    },
   },
 })
 @Injectable()
@@ -19,6 +30,11 @@ export class ArticleList {
   @Selector()
   static getArticles(state: ArticleListModel) {
     return state.articles;
+  }
+
+  @Selector()
+  static getSelectedDesc(state: ArticleListModel) {
+    return state.selected.description;
   }
 
   @Action(AddArticle)
@@ -40,6 +56,16 @@ export class ArticleList {
     const state = getState();
     patchState({
       articles: [...state.articles.filter((data) => data.id != payload.id)],
+    });
+  }
+
+  @Action(SetSelected)
+  update(
+    { patchState }: StateContext<ArticleListModel>,
+    { payload }: SetSelected
+  ) {
+    patchState({
+      selected: payload,
     });
   }
 }
