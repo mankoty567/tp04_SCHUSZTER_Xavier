@@ -1,0 +1,149 @@
+<div class="center">
+  <div class="card formStyle" style="width: 18rem" [hidden]="submitted">
+    <form id="formClient" [formGroup]="user" (ngSubmit)="submit()">
+      <div class="mb-3">
+        <label>Nom : <input type="text" formControlName="firstname" /> </label>
+        <div
+          *ngIf="!user.value.firstname && nbSubmit !== 0"
+          class="alert alert-danger"
+        >
+          Le nom est requis.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label
+          >Prénom : <input type="text" formControlName="lastname" />
+        </label>
+        <div
+          *ngIf="!user.value.lastname && nbSubmit !== 0"
+          class="alert alert-danger"
+        >
+          Le prénom est requis.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label
+          >Adresse :
+          <input type="text" formControlName="address" />
+        </label>
+        <div
+          *ngIf="!user.value.address && nbSubmit !== 0"
+          class="alert alert-danger"
+        >
+          L'adresse est requise.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label
+          >Code postal :
+          <input type="text" formControlName="postalCode" />
+        </label>
+        <div
+          *ngIf="!user.value.postalCode && nbSubmit !== 0"
+          class="alert alert-danger"
+        >
+          Le code postal est requise.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label
+          >Téléphone :
+          <input type="text" formControlName="tel" />
+        </label>
+        <p [hidden]="user.value.tel.length !== 10">
+          Numéro formatté : {{ user.value.tel | phonePipe }}
+        </p>
+        <div
+          *ngIf="!user.value.tel && nbSubmit !== 0"
+          class="alert alert-danger"
+        >
+          Le numéro de téléphone est requis.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label
+          >Email :
+          <input type="text" formControlName="mail" />
+        </label>
+        <div
+          *ngIf="!user.value.mail && nbSubmit !== 0"
+          class="alert alert-danger"
+        >
+          L'email est requis.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label
+          >Civilité :
+          <input type="text" formControlName="civ" />
+        </label>
+        <div
+          *ngIf="!user.value.civ && nbSubmit !== 0"
+          class="alert alert-danger"
+        >
+          La civilité est requise.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label
+          >Login :
+          <input type="text" formControlName="login" />
+        </label>
+        <div
+          *ngIf="!user.value.login && nbSubmit !== 0"
+          class="alert alert-danger"
+        >
+          Le login est requis.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label
+          >Mot de passe : <input type="password" formControlName="password" />
+        </label>
+        <div
+          *ngIf="!user.value.password && nbSubmit !== 0"
+          class="alert alert-danger"
+        >
+          Le mot de passe est requis.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label
+          >Confirmer le mot de passe :
+          <input type="password" formControlName="passwordConfirm" />
+        </label>
+        <div
+          *ngIf="!user.value.passwordConfirm && nbSubmit !== 0"
+          class="alert alert-danger"
+        >
+          La confirmation du mot de passe est requise.
+        </div>
+        <div
+          *ngIf="
+            user.value.passwordConfirm !== user.value.password &&
+            user.value.passwordConfirm
+          "
+          class="alert alert-danger"
+        >
+          Le mot de passe doit être identique.
+        </div>
+      </div>
+
+      <div class="center">
+        <button type="submit" id="submit" class="btn btn-primary">
+          Valider
+        </button>
+      </div>
+    </form>
+    <span class="invalid-feedback"></span>
+  </div>
+</div>

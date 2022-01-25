@@ -1,0 +1,6 @@
+[
+  { "id": 0, "name": "Banane", "price": 3.9, "number": 5 },
+  { "id": 1, "name": "Pomme", "price": 2.7, "number": 8 },
+  { "id": 2, "name": "Poire", "price": 2.35, "number": 3 },
+  { "id": 3, "name": "Cerise", "price": 4.8, "number": 12 }
+]

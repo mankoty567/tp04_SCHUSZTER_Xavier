@@ -1,0 +1,19 @@
+<h2>Catalogue de produit :</h2>
+<input
+  id="searchField"
+  name="searchField"
+  type="text"
+  title="Entrez ici un produit à rechercher :"
+  [(ngModel)]="searchFilter"
+  (input)="filterList($event)"
+/>
+<h2>List des produits :</h2>
+<ul>
+  <div *ngFor="let item of productList">
+    <li>
+      <p>Type : {{ item.name }}</p>
+      <p>Prix : {{ item.price }}</p>
+      <p>Quantité : {{ item.number }}</p>
+    </li>
+  </div>
+</ul>
