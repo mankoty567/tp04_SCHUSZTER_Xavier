@@ -24,16 +24,10 @@
       </div>
 
       <div class="mb-3">
-        <label
-          >Adresse :
-          <input type="text" formControlName="address" />
-        </label>
-        <div
-          *ngIf="!user.value.address && nbSubmit !== 0"
-          class="alert alert-danger"
-        >
-          L'adresse est requise.
-        </div>
+        <app-adresses-field
+          [addresses]="user.value.addresses"
+          (newAddresses)="adressChangedHandler($event)"
+        ></app-adresses-field>
       </div>
 
       <div class="mb-3">

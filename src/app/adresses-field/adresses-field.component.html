@@ -1,0 +1,13 @@
+<label>Address :</label>
+<div class="addressManagement">
+  <input type="text" [(ngModel)]="inputAddress" />
+  <button (click)="addAddress(inputAddress)" type="button">Add</button>
+</div>
+<div>
+  <ul>
+    <div *ngFor="let address of addresses">
+      <li>{{ address }}</li>
+      <button (click)="deleteAddress(address)" type="button">Remove</button>
+    </div>
+  </ul>
+</div>

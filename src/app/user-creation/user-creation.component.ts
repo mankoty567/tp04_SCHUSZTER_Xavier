@@ -8,6 +8,11 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
+import { Select, Store } from '@ngxs/store';
+import { Observable, Subscription } from 'rxjs';
+import { AddUser } from 'shared/actions/user.action';
+import { User } from 'shared/models/user';
+import { UserState } from 'shared/states/user-state';
 import { ClientServiceService } from './client-service.service';
 
 //Non fonctionnel pour le moment ... malheureusement.
@@ -25,22 +30,29 @@ export class UserCreationComponent implements OnInit {
     let confirmPass = group.get('confirmPassword')?.value;
     return pass === confirmPass ? null : { notSame: true };
   };
+
+  userStore$: Observable<User>;
+  submitted: boolean = false;
+  nbSubmit: number = 0;
+
+  subscribe: Subscription | undefined;
+
   constructor(
     private userService: ClientServiceService,
-    private formeBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private store: Store
   ) {
-    this.user = this.formeBuilder.group(
+    this.user = this.formBuilder.group(
       {
         firstname: ['', Validators.required],
         lastname: ['', Validators.required],
-        address: ['', Validators.required],
+        addresses: [[], Validators.required],
         postalCode: ['', Validators.required],
         tel: [
           '',
-          Validators.required,
-          Validators.pattern(/^(\d{3})(\d{3})(\d{4})$/),
+          [Validators.required, Validators.pattern(/^(\d{3})(\d{3})(\d{4})$/)],
         ],
-        mail: ['', Validators.required, Validators.email],
+        mail: ['', [Validators.required, Validators.email]],
         civ: ['', Validators.required],
         login: ['', Validators.required],
         password: ['', Validators.required],
@@ -48,13 +60,22 @@ export class UserCreationComponent implements OnInit {
       },
       { Validators: this.checkPasswords }
     );
+    this.userStore$ = this.store.select(UserState.getUser);
+    //On set à nouveau le user en fonction du state mais ... ça ne fonctionne pas
+    this.subscribe = this.userStore$.pipe().subscribe((data) => {
+      this.user.setValue(data);
+    });
+  }
+
+  ngOnDestoy(): void {
+    if (this.subscribe) this.subscribe.unsubscribe();
   }
 
   ngOnInit(): void {}
   user = new FormGroup({
     firstname: new FormControl(),
     lastname: new FormControl(),
-    address: new FormControl(),
+    addresses: new FormControl(),
     postalCode: new FormControl(),
     tel: new FormControl(),
     mail: new FormControl(),
@@ -64,15 +85,18 @@ export class UserCreationComponent implements OnInit {
     passwordConfirm: new FormControl(),
   });
 
-  submitted: boolean = false;
-  nbSubmit: number = 0;
+  adressChangedHandler(addresses: string[]) {
+    this.user.setValue({ ...this.user.value, addresses });
+  }
+
+  addUser() {
+    this.store.dispatch(new AddUser(this.user.value));
+  }
 
   submit() {
     this.nbSubmit++;
-    console.log("Il reste plus qu'à implémenter le onSubmit");
+    this.addUser();
   }
-  //input()
-  //output() ==> Pour passer d'un composant à l'autre
 }
 
 //Ligne trouvée sur learnersBucket pour l'algo

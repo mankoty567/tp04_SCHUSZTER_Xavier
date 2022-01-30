@@ -16,6 +16,8 @@ import { NgxsModule } from '@ngxs/store';
 import { ArticleList } from 'shared/states/article-list-state';
 import { PanierComponent } from './panier/panier.component';
 import { DetailComponent } from './detail/detail.component';
+import { AdressesFieldComponent } from './adresses-field/adresses-field.component';
+import { UserState } from 'shared/states/user-state';
 
 const appRoutes: Routes = [
   {
@@ -64,6 +66,7 @@ const appRoutes: Routes = [
     TetiereComponent,
     PanierComponent,
     DetailComponent,
+    AdressesFieldComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,7 +75,7 @@ const appRoutes: Routes = [
     FormsModule,
     AppRoutingModule,
     RouterModule.forRoot(appRoutes),
-    NgxsModule.forRoot([ArticleList]),
+    NgxsModule.forRoot([ArticleList, UserState]),
   ],
   providers: [],
   bootstrap: [AppComponent, UserCreationComponent],
