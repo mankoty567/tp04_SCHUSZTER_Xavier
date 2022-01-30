@@ -1,9 +1,15 @@
-<div class="HeaderMenu">
-  <a [routerLink]="['/login']">Login</a>
-  <a [routerLink]="['/catalog']">Catalogue</a>
-  <p>
+<nav class="navbar navbar-toggleable-sm navbar-inverse bg-primary fixed-top">
+  <div class="container">
+    <div class="d-flex w-100 justify-content-between flex-last">
+      <div class="d-flex w-100 flex-first justify-content-between">
+        <a [routerLink]="['/login']" class="navbar-brand">Login</a>
+        <a [routerLink]="['/catalog']" class="navbar-brand">Catalogue</a>
+      </div>
+    </div>
+  </div>
+  <span class="navbar-text">
     Nombre de produits dans le panier : {{ nb$ | async }}
     <br />
     <a [routerLink]="['/summary']">Voir mon panier</a>
-  </p>
-</div>
+  </span>
+</nav>

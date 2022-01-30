@@ -78,6 +78,6 @@ const appRoutes: Routes = [
     NgxsModule.forRoot([ArticleList, UserState]),
   ],
   providers: [],
-  bootstrap: [AppComponent, UserCreationComponent],
+  bootstrap: [AppComponent, UserCreationComponent, TetiereComponent],
 })
 export class AppModule {}

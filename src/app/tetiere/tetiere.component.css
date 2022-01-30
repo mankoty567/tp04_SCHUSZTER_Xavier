@@ -1,7 +1,8 @@
-.HeaderMenu {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  align-content: center;
-  justify-content: center;
+a {
+  color: white;
+}
+
+span {
+  color: white;
+  margin-right: 1%;
 }
